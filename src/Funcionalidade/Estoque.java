@@ -1,0 +1,114 @@
+package Funcionalidade;
+
+import java.util.Objects;
+
+public class Estoque {
+
+    private Produto[] list;
+    private int qtd_list;
+
+    private int count = 0;
+
+    public Estoque(int qtd_list){
+
+        this.qtd_list = qtd_list;
+        this.list = new Produto[this.qtd_list];
+
+    }
+
+    public void cadastrar(Produto produto){
+
+        if(this.count < this.qtd_list){
+
+            this.list[count] = produto;
+            count++;
+
+        }else {
+
+            System.out.println("Lista está cheia!!!");
+
+        }
+
+    }
+
+    public void listar(){
+
+        System.out.println("Cod | Nome | Qtd | Preço");
+
+        for (int i = 0; i < count; i++){
+
+            System.out.println(
+
+                    list[i].getCod() + " | " +
+                    list[i].getName() + " | " +
+                    list[i].getQtd() + " | " +
+                    list[i].getPreco()
+
+            );
+
+        }
+
+    }
+
+    public void buscar(String name){
+
+        for(int i = 0; i < count; i++){
+
+            if(Objects.equals(list[i].getName(), name)){
+
+                System.out.println("Produto encontrado.");
+                break;
+
+            }
+
+        }
+
+    }
+
+    public void atualizar(int cod, double newPreco){
+
+        int i = 0;
+
+        if(list[0] == null) return;
+
+        while(i < count && list[i].getCod() != cod){
+            i++;
+        }
+
+        if(list[i] == null) return;
+
+        list[i].setPreco(newPreco);
+
+    }
+
+    public void excluir(int cod){
+
+        if(list[0] == null) {return;}
+
+        int i = 0;
+        Produto atual = list[0];
+
+
+        while (i < count && list[i].getCod() != cod){
+            i++;
+            atual = list[i];
+        }
+
+        if(atual == null){
+            System.out.println("Item inexistente");
+            return;
+        }
+
+        for (int k = i; k < count - 1; k++){
+
+            list[k] = list[k + 1];
+
+        }
+
+        list[count - 1] = null;
+        count--;
+
+
+    }
+
+}
