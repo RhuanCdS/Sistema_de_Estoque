@@ -26,7 +26,7 @@ public abstract class Person {
     }
 
     private void recuperarSenha(String newSenha){
-        this.senha = senha;
+        this.senha = newSenha;
     }
 
     public boolean verificacaoSenha(String senha) {
@@ -41,8 +41,9 @@ public abstract class Person {
         } else {
 
             System.out.println("Senha incorreta");
+            this.tentativasSenha++;
 
-            if(this.tentativasSenha > 3){
+            if(this.tentativasSenha >= 3){
 
                 System.out.println("Encaminhando para a recuperação de senha.");
 
@@ -50,16 +51,16 @@ public abstract class Person {
 
                 System.out.println("Digite sua nova senha: ");
                 String newSenha = scanner.nextLine();
+
                 recuperarSenha(newSenha);
 
-            }
+                this.tentativasSenha = 0;
 
-            this.tentativasSenha++;
+            }
 
         }
 
         return false;
     }
-
 
 }
