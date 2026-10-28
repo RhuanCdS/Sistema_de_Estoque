@@ -1,5 +1,7 @@
 package Usuarios;
 
+import java.util.Scanner;
+
 public abstract class Person {
 
     private String name;
@@ -7,6 +9,57 @@ public abstract class Person {
     private String login;
     private String senha;
 
+    private int tentativasSenha = 0;
+
+    public Person(String name, String login, String senha){
+        this.name = name;
+        this.login = login;
+        this.senha = senha;
+    }
+
+    protected String getLogin(){
+        return this.login;
+    }
+
+    protected String getSenha(){
+        return this.senha;
+    }
+
+    private void recuperarSenha(String newSenha){
+        this.senha = senha;
+    }
+
+    public boolean verificacaoSenha(String senha) {
+
+        if (senha.equals(this.senha)) {
+
+            System.out.println("Senha aprovada!!!");
+            this.tentativasSenha = 0;
+
+            return true;
+
+        } else {
+
+            System.out.println("Senha incorreta");
+
+            if(this.tentativasSenha > 3){
+
+                System.out.println("Encaminhando para a recuperação de senha.");
+
+                Scanner scanner = new Scanner(System.in);
+
+                System.out.println("Digite sua nova senha: ");
+                String newSenha = scanner.nextLine();
+                recuperarSenha(newSenha);
+
+            }
+
+            this.tentativasSenha++;
+
+        }
+
+        return false;
+    }
 
 
 }
