@@ -1,4 +1,4 @@
 package Usuarios;
 
-public class Cliente {
+public class Cliente extends Person {
 }
