@@ -25,7 +25,7 @@ public abstract class Person {
         return this.senha;
     }
 
-    private void recuperarSenha(String newSenha){
+    protected void recuperarSenha(String newSenha){
         this.senha = newSenha;
     }
 

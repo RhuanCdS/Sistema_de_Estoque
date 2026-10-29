@@ -25,6 +25,13 @@ public class Admin extends Person{
 
         if(verif){
             opcoes();
+
+            Scanner scanOp = new Scanner(System.in);
+            System.out.println("Com qual ação deseja prosseguir ?");
+            int op = scanOp.nextInt();
+
+            selecionarOpcoes(op);
+
         }
 
     }
@@ -48,29 +55,68 @@ public class Admin extends Person{
     }
 
     private void selecionarOpcoes(int qtd){
+
+        Scanner scanner = new Scanner(System.in);
+
         switch (qtd){
             case 1:
+                System.out.println("Digite o tamanho do estoque: ");
+                int tamanho = scanner.nextInt();
+
+                criarEstoque(tamanho);
                 break;
             case 2:
+                System.out.println("Crie o produto: Ex: ( Nome, Qtd, preço ) ");
+                String name = scanner.next();
+                int qtd_op = scanner.nextInt();
+                double price = scanner.nextDouble();
+
+                criarProduto(name, qtd_op, price);
                 break;
             case 3:
+                list.listar();
                 break;
             case 4:
+                System.out.println("Qual produto deseja procurar ?");
+                String nameProduto = scanner.nextLine();
+                list.buscar(nameProduto);
                 break;
             case 5:
+                System.out.println("Digite o cod e o novo preço: ");
+                int cod = scanner.nextInt();
+                double preco = scanner.nextDouble();
+
+                list.atualizar(cod, preco);
+
                 break;
             case 6:
+                System.out.println("Digite o codigo do produto que desja excluir: ");
+                int c = scanner.nextInt();
+
+                list.excluir(c);
+
                 break;
             case 7:
+
+                System.out.println("Digite o cod para ver q qtd no estoque:  ");
+                int i = scanner.nextInt();
+
+                list.consultarQtdProduto(i);
+
                 break;
             case 8:
+                System.out.println("Digite a nova senha: ");
+                String s = scanner.next();
+
+                recuperarSenha(s);
                 break;
             case 0:
+                System.out.println("Encerrou o programa.");
                 break;
         }
     }
 
-    public void criarProduto(String name, int qtd, double preco){
+    private void criarProduto(String name, int qtd, double preco){
 
         if(list != null){
             this.produto = new Produto(name, qtd, preco);
@@ -81,7 +127,7 @@ public class Admin extends Person{
         System.out.println("Estoque inexistente!!!");
     }
 
-    public void criarEstoque(int qtd){
+    private void criarEstoque(int qtd){
         this.list = new Estoque(qtd);
     }
 
