@@ -111,4 +111,13 @@ public class Estoque {
 
     }
 
+    public void consultarQtdProduto(int c){
+
+        Produto t = list[c + 1];
+
+        int qtdP = t.getQtd();
+
+        System.out.println(qtdP);
+    }
+
 }
