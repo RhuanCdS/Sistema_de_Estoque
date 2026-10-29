@@ -113,7 +113,12 @@ public class Estoque {
 
     public void consultarQtdProduto(int c){
 
-        Produto t = list[c + 1];
+        if(list[0] == null){
+            System.out.println("Nenhum produto no estoque.");
+            return;
+        }
+
+        Produto t = list[c - 1];
 
         int qtdP = t.getQtd();
 
