@@ -29,14 +29,12 @@ public abstract class Person {
         this.senha = newSenha;
     }
 
-    public boolean verificacaoSenha(String senha) {
+    protected boolean verificacaoSenha(String senha) {
 
         if (senha.equals(this.senha)) {
 
             System.out.println("Senha aprovada!!!");
             this.tentativasSenha = 0;
-
-            abrirOpcoes();
 
             return true;
 
@@ -65,6 +63,8 @@ public abstract class Person {
         return false;
     }
 
-    public abstract void abrirOpcoes();
+    public abstract void abrirOpcoes(int n);
+
+    protected abstract void opcoes();
 
 }

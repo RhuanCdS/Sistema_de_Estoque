@@ -2,6 +2,9 @@ package Main;
 
 import Funcionalidade.Produto;
 import Funcionalidade.Estoque;
+import Usuarios.Admin;
+import Usuarios.Cliente;
+import Usuarios.Person;
 
 public class Main {
 

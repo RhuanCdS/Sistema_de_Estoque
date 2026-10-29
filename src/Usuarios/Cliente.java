@@ -6,4 +6,14 @@ public class Cliente extends Person {
         super(name, login, senha);
     }
 
+    @Override
+    public void abrirOpcoes(int n) {
+
+    }
+
+    @Override
+    protected void opcoes() {
+
+    }
+
 }
