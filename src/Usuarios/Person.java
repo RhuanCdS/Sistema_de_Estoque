@@ -40,12 +40,11 @@ public abstract class Person {
 
         } else {
 
-            System.out.println("Senha incorreta");
+            System.out.println("senha incorreta");
             this.tentativasSenha++;
 
             if(this.tentativasSenha >= 3){
-
-                System.out.println("Encaminhando para a recuperação de senha.");
+                System.out.println("\n== Encaminhando para a recuperação de senha. ==");
 
                 Scanner scanner = new Scanner(System.in);
 

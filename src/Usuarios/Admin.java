@@ -23,6 +23,15 @@ public class Admin extends Person{
 
         boolean verif = verificacaoSenha(senha);
 
+        while (verif == false){
+
+            System.out.println("Digite novamente sua senha: ");
+            senha = scanner.nextLine();
+
+            verif = verificacaoSenha(senha);
+
+        }
+
         if(verif){
 
             Scanner scanOp = new Scanner(System.in);
@@ -48,7 +57,7 @@ public class Admin extends Person{
     protected void opcoes() {
         System.out.println(
                 "" +
-                "========== MENU ADMINISTRADOR ==========\n" +
+                "\n========== MENU ADMINISTRADOR ==========\n" +
                 "1 - Criar estoque\n" +
                 "2 - Cadastrar produto\n" +
                 "3 - Listar produtos\n" +
@@ -82,6 +91,12 @@ public class Admin extends Person{
                 criarProduto(name, qtd_op, price);
                 break;
             case 3:
+
+                if(list  == null){
+                    System.out.println("Estoque inexistente.");
+                    return;
+                }
+
                 list.listar();
                 break;
             case 4:
@@ -114,7 +129,7 @@ public class Admin extends Person{
                 break;
             case 8:
                 System.out.println("Digite a nova senha: ");
-                String s = scanner.next();
+                String s = scanner.nextLine();
 
                 recuperarSenha(s);
                 break;
