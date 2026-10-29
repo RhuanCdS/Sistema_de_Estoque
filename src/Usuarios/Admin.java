@@ -15,7 +15,7 @@ public class Admin extends Person{
     }
 
     @Override
-    public void abrirOpcoes(int n) {
+    public void abrirOpcoes() {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Digite sua senha: ");

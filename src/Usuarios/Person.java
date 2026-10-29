@@ -63,7 +63,7 @@ public abstract class Person {
         return false;
     }
 
-    public abstract void abrirOpcoes(int n);
+    public abstract void abrirOpcoes();
 
     protected abstract void opcoes();
 
