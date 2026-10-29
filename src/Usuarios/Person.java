@@ -36,6 +36,8 @@ public abstract class Person {
             System.out.println("Senha aprovada!!!");
             this.tentativasSenha = 0;
 
+            abrirOpcoes();
+
             return true;
 
         } else {
@@ -62,5 +64,7 @@ public abstract class Person {
 
         return false;
     }
+
+    public abstract void abrirOpcoes();
 
 }
