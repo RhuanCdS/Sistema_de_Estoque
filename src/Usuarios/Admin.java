@@ -24,13 +24,21 @@ public class Admin extends Person{
         boolean verif = verificacaoSenha(senha);
 
         if(verif){
-            opcoes();
 
             Scanner scanOp = new Scanner(System.in);
-            System.out.println("Com qual ação deseja prosseguir ?");
-            int op = scanOp.nextInt();
 
-            selecionarOpcoes(op);
+            int op = 10;
+
+            while (op != 0){
+                opcoes();
+
+                System.out.println("Com qual ação deseja prosseguir ?");
+                op = scanOp.nextInt();
+
+                selecionarOpcoes(op);
+
+            }
+
 
         }
 
@@ -118,21 +126,29 @@ public class Admin extends Person{
 
     private void criarProduto(String name, int qtd, double preco){
 
-        if(list != null){
-            this.produto = new Produto(name, qtd, preco);
-
-            inserirProdutoNoEstoque();
+        if(list == null){
+            System.out.println("Estoque inexistente!!!");
+            return;
         }
 
-        System.out.println("Estoque inexistente!!!");
+        this.produto = new Produto(name, qtd, preco);
+
+        inserirProdutoNoEstoque(this.produto);
+
     }
 
     private void criarEstoque(int qtd){
+
+        if(list != null){
+            System.out.println("Já existe um estoque cadastrado nesse admin.");
+            return;
+        }
+
         this.list = new Estoque(qtd);
     }
 
-    private void inserirProdutoNoEstoque(){
-        list.cadastrar(this.produto);
+    private void inserirProdutoNoEstoque(Produto produto){
+        list.cadastrar(produto);
     }
 
 }
