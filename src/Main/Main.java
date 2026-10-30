@@ -8,8 +8,8 @@ public class Main {
 
     static void main(String[] args) {
 
-    Person admin = new Admin("Adm", "admin@admin.com", "admin1111");
-    admin.abrirOpcoes();
+    Person adm = new Admin("Adm", "admin@admin.com", "admin1111");
+    adm.abrirOpcoes();
 
     }
 }

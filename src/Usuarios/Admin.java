@@ -105,11 +105,40 @@ public class Admin extends Person{
                 list.buscar(nameProduto);
                 break;
             case 5:
-                System.out.println("Digite o cod e o novo preço: ");
-                int cod = scanner.nextInt();
-                double preco = scanner.nextDouble();
+                System.out.println("" +
+                        "Selecione uma das opções: \n" +
+                        "1 - Atualizar preço \n" +
+                        "2 - Atualizar quantidade" +
+                        "");
 
-                list.atualizar(cod, preco);
+                int select = scanner.nextInt();
+
+                list.listar();
+
+                if(select == 1){
+
+                    System.out.println("\nDigite o COD do produto: ");
+                    int cod = scanner.nextInt();
+                    System.out.println("Digite o novo preço: ");
+                    double newPrice = scanner.nextDouble();
+
+                    list.atualizarPrice(cod, newPrice);
+
+                } else if (select == 2){
+
+                    System.out.println("\nDigite o COD do produto: ");
+                    int cod = scanner.nextInt();
+                    System.out.println("Digite o valor que deseja adicionar: ");
+                    int newPrice = scanner.nextInt();
+
+                    list.adicionarQtdProduto(cod, newPrice);
+                }else{
+                    System.out.println("" +
+                            "Selecione uma opção existente." +
+                            "O programa vai se encerrar."
+                    );
+
+                }
 
                 break;
             case 6:

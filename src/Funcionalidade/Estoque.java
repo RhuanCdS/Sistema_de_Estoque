@@ -65,7 +65,7 @@ public class Estoque {
 
     }
 
-    public void atualizar(int cod, double newPreco){
+    public void atualizarPrice(int cod, double newPreco){
 
         int i = 0;
 
@@ -78,6 +78,8 @@ public class Estoque {
         if(list[i] == null) return;
 
         list[i].setPreco(newPreco);
+
+        System.out.println("Preço do produto atualizado com sucesso!!!");
 
     }
 
@@ -123,6 +125,26 @@ public class Estoque {
         int qtdP = t.getQtd();
 
         System.out.println(qtdP);
+    }
+
+    public void adicionarQtdProduto(int index, int qtd){
+
+        int i = 0;
+
+        if(list[0] == null) return;
+
+        while(list[i].getCod() != index && list[i] != null){
+            i++;
+        }
+
+        if(list[i] == null){
+            System.out.println("Produto não encontrado!!!");
+            return;
+        }
+
+        list[i].aumentarQtdProduto(qtd);
+        System.out.println("Quantidade de produto adicionado com sucesso.");
+
     }
 
 }
