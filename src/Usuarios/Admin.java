@@ -101,11 +101,23 @@ public class Admin extends Person{
                 list.listar();
                 break;
             case 4:
+
+                if(list  == null){
+                    System.out.println("Estoque inexistente.");
+                    return;
+                }
+
                 System.out.println("Qual produto deseja procurar ?");
                 String nameProduto = scanner.nextLine();
                 list.buscar(nameProduto);
                 break;
             case 5:
+
+                if(list  == null){
+                    System.out.println("Estoque inexistente.");
+                    return;
+                }
+
                 System.out.println("" +
                         "Selecione uma das opções: \n" +
                         "1 - Atualizar preço \n" +
@@ -143,6 +155,12 @@ public class Admin extends Person{
 
                 break;
             case 6:
+
+                if(list  == null){
+                    System.out.println("Estoque inexistente.");
+                    return;
+                }
+
                 System.out.println("Digite o codigo do produto que desja excluir: ");
                 int c = scanner.nextInt();
 
@@ -150,6 +168,11 @@ public class Admin extends Person{
 
                 break;
             case 7:
+
+                if(list  == null){
+                    System.out.println("Estoque inexistente.");
+                    return;
+                }
 
                 System.out.println("Digite o cod para ver q qtd no estoque:  ");
                 int i = scanner.nextInt();
