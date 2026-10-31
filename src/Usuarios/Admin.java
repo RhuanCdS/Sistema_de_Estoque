@@ -219,8 +219,4 @@ public class Admin extends Person{
         list.cadastrar(produto);
     }
 
-    private Estoque getEstoque() {
-        return this.list;
-    }
-
 }
