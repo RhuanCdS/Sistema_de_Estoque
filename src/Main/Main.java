@@ -11,10 +11,5 @@ public class Main {
     Person adm = new Admin("Adm", "admin@admin.com", "admin1111");
     adm.abrirOpcoes();
 
-
-
-
-
-
     }
 }
