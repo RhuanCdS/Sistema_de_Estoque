@@ -4,16 +4,32 @@ import java.util.Objects;
 
 public class Estoque {
 
+    private static Estoque instancia;
+
     private Produto[] list;
     private int qtd_list;
 
     private int count = 0;
 
-    public Estoque(int qtd_list){
+    private Estoque(int qtd_list){
 
         this.qtd_list = qtd_list;
         this.list = new Produto[this.qtd_list];
 
+    }
+
+    public static Estoque criarList(int size){
+
+        if(instancia == null){
+            instancia = new Estoque(size);
+        }
+
+        return instancia;
+
+    }
+
+    public static Estoque getInstancia() {
+        return instancia;
     }
 
     public void cadastrar(Produto produto){
@@ -101,7 +117,7 @@ public class Estoque {
         Produto atual = list[0];
 
 
-        while (i < count && list[i].getCod() != cod){
+        while (i < count - 1 && list[i].getCod() != cod){
             i++;
             atual = list[i];
         }
@@ -143,7 +159,7 @@ public class Estoque {
 
         if(list[0] == null) return;
 
-        while(list[i].getCod() != index && list[i] != null){
+        while(list[i].getCod() != index && list[i] != null && i < count - 1){
             i++;
         }
 
@@ -163,7 +179,7 @@ public class Estoque {
 
         if(list[0] == null) return;
 
-        while(list[i].getCod() != index && list[i] != null){
+        while(list[i].getCod() != index && list[i] != null && i < count - 1){
             i++;
         }
 

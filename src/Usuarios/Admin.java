@@ -207,16 +207,20 @@ public class Admin extends Person{
 
     private void criarEstoque(int qtd){
 
-        if(list != null){
-            System.out.println("Já existe um estoque cadastrado nesse admin.");
+        if (Estoque.getInstancia() != null){
+            System.out.println("Já existe um estoque cadastrado.");
             return;
         }
 
-        this.list = new Estoque(qtd);
+        this.list = Estoque.criarList(qtd);
     }
 
     private void inserirProdutoNoEstoque(Produto produto){
         list.cadastrar(produto);
+    }
+
+    private Estoque getEstoque() {
+        return this.list;
     }
 
 }

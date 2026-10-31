@@ -1,7 +1,6 @@
 package Usuarios;
 
 import Funcionalidade.Estoque;
-import Funcionalidade.Produto;
 
 import java.util.Scanner;
 
@@ -67,6 +66,13 @@ public class Cliente extends Person{
 
     @Override
     protected void selecionarOpcoes(int qtd) {
+
+        Estoque list = Estoque.getInstancia();
+
+        if (list == null) {
+            System.out.println("Estoque ainda não foi criado.");
+            return;
+        }
 
         Scanner scanner = new Scanner(System.in);
 
