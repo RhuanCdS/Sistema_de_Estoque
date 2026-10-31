@@ -57,6 +57,11 @@ public class Estoque {
 
     public void buscar(String name){
 
+        if(list == null){
+            System.out.println("Estoque vazio!!!");
+            return;
+        }
+
         for(int i = 0; i < count; i++){
 
             if(Objects.equals(list[i].getName(), name)){
