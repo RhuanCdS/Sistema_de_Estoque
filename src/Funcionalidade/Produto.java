@@ -40,6 +40,10 @@ public class Produto {
         this.qtd = qtd;
     }
 
+    protected void aumentarQtdProduto(int qtd){
+        this.qtd += qtd;
+    }
+
     protected double getPreco(){
         return this.preco;
     }
