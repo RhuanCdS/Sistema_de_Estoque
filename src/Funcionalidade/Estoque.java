@@ -33,6 +33,11 @@ public class Estoque {
 
     public void listar(){
 
+        if(list == null){
+            System.out.println("Estoque vazio!!!");
+            return;
+        }
+
         System.out.println("Cod | Nome | Qtd | Preço");
 
         for (int i = 0; i < count; i++){
@@ -144,6 +149,33 @@ public class Estoque {
 
         list[i].aumentarQtdProduto(qtd);
         System.out.println("Quantidade de produto adicionado com sucesso.");
+
+    }
+
+    public void retirarQtdProduto(int index, int qtd){
+
+        int i = 0;
+
+        if(list[0] == null) return;
+
+        while(list[i].getCod() != index && list[i] != null){
+            i++;
+        }
+
+        if(list[i] == null){
+            System.out.println("Produto não encontrado!!!");
+            return;
+        }
+
+        int qtdP = list[i].getQtd();
+
+        if(qtdP < qtd){
+            System.out.println("Quantidade de produto no estoque insuficiente.");
+            return;
+        }
+
+        list[i].diminuirQtdProduto(qtd);
+        System.out.println("Produto comprado com sucesso.");
 
     }
 

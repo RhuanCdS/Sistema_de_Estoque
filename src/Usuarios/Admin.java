@@ -71,7 +71,8 @@ public class Admin extends Person{
         );
     }
 
-    private void selecionarOpcoes(int qtd){
+    @Override
+    protected void selecionarOpcoes(int qtd){
 
         Scanner scanner = new Scanner(System.in);
 

@@ -44,6 +44,10 @@ public class Produto {
         this.qtd += qtd;
     }
 
+    protected void diminuirQtdProduto(int qtd){
+        this.qtd -= qtd;
+    }
+
     protected double getPreco(){
         return this.preco;
     }

@@ -66,4 +66,6 @@ public abstract class Person {
 
     protected abstract void opcoes();
 
+    protected abstract void selecionarOpcoes(int qtd);
+
 }
