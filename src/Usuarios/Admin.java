@@ -2,6 +2,7 @@ package Usuarios;
 
 import Funcionalidade.Estoque;
 import Funcionalidade.Produto;
+import Usuarios.Enums.AdminOp;
 
 import java.util.Scanner;
 
@@ -9,6 +10,8 @@ public class Admin extends Person{
 
     private Produto produto;
     private Estoque list;
+
+    private AdminOp adminOp;
 
     public Admin(String name, String login, String senha) {
         super(name, login, senha);
@@ -23,7 +26,7 @@ public class Admin extends Person{
 
         boolean verif = verificacaoSenha(senha);
 
-        while (verif == false){
+        while (!verif){
 
             System.out.println("Digite novamente sua senha: ");
             senha = scanner.nextLine();
@@ -36,7 +39,7 @@ public class Admin extends Person{
 
             Scanner scanOp = new Scanner(System.in);
 
-            int op = 10;
+            int op = -1;
 
             while (op != 0){
                 opcoes();
@@ -55,20 +58,7 @@ public class Admin extends Person{
 
     @Override
     protected void opcoes() {
-        System.out.println(
-                "" +
-                "\n========== MENU ADMINISTRADOR ==========\n" +
-                "1 - Criar estoque\n" +
-                "2 - Cadastrar produto\n" +
-                "3 - Listar produtos\n" +
-                "4 - Buscar produto\n" +
-                "5 - Atualizar produto\n" +
-                "6 - Excluir produto\n" +
-                "7 - Consultar quantidade em estoque\n" +
-                "8 - Alterar senha\n" +
-                "0 - Sair\n" +
-                "========================================"
-        );
+        AdminOp.imprimir();
     }
 
     @Override
@@ -76,14 +66,25 @@ public class Admin extends Person{
 
         Scanner scanner = new Scanner(System.in);
 
-        switch (qtd){
-            case 1:
+        AdminOp op;
+
+        try {
+
+            op = AdminOp.selecionarOp(qtd);
+
+        } catch (Exception e) {
+            System.out.println("Opção inválida.");
+            return;
+        }
+
+        switch (op){
+            case CRIAR:
                 System.out.println("Digite o tamanho do estoque: ");
                 int tamanho = scanner.nextInt();
 
                 criarEstoque(tamanho);
                 break;
-            case 2:
+            case CADASTRAR:
                 System.out.println("Crie o produto: Ex: ( Nome, Qtd, preço ) ");
                 String name = scanner.next();
                 int qtd_op = scanner.nextInt();
@@ -91,7 +92,7 @@ public class Admin extends Person{
 
                 criarProduto(name, qtd_op, price);
                 break;
-            case 3:
+            case LISTAR:
 
                 if(list  == null){
                     System.out.println("Estoque inexistente.");
@@ -100,7 +101,7 @@ public class Admin extends Person{
 
                 list.listar();
                 break;
-            case 4:
+            case BUSCAR:
 
                 if(list  == null){
                     System.out.println("Estoque inexistente.");
@@ -111,7 +112,7 @@ public class Admin extends Person{
                 String nameProduto = scanner.nextLine();
                 list.buscar(nameProduto);
                 break;
-            case 5:
+            case ATUALIZAR:
 
                 if(list  == null){
                     System.out.println("Estoque inexistente.");
@@ -154,7 +155,7 @@ public class Admin extends Person{
                 }
 
                 break;
-            case 6:
+            case EXCLUIR:
 
                 if(list  == null){
                     System.out.println("Estoque inexistente.");
@@ -167,7 +168,7 @@ public class Admin extends Person{
                 list.excluir(c);
 
                 break;
-            case 7:
+            case CONSULTAR:
 
                 if(list  == null){
                     System.out.println("Estoque inexistente.");
@@ -180,16 +181,17 @@ public class Admin extends Person{
                 list.consultarQtdProduto(i);
 
                 break;
-            case 8:
+            case ALTERAR:
                 System.out.println("Digite a nova senha: ");
                 String s = scanner.nextLine();
 
                 recuperarSenha(s);
                 break;
-            case 0:
+            case SAIR:
                 System.out.println("Encerrou o programa.");
                 break;
         }
+
     }
 
     private void criarProduto(String name, int qtd, double preco){
