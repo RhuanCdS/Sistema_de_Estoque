@@ -110,7 +110,8 @@ public class Admin extends Person{
 
                 System.out.println("Qual produto deseja procurar ?");
                 String nameProduto = scanner.nextLine();
-                list.buscar(nameProduto);
+                
+                list.buscar(nameProduto.toUpperCase());
                 break;
             case ATUALIZAR:
 

@@ -80,14 +80,16 @@ public class Estoque {
 
         for(int i = 0; i < count; i++){
 
-            if(Objects.equals(list[i].getName(), name)){
+            if(Objects.equals(list[i].getName().toUpperCase(), name)){
 
                 System.out.println("Produto encontrado.");
-                break;
+                return;
 
             }
 
         }
+
+        System.out.println("Produto não encontrado.");
 
     }
 
