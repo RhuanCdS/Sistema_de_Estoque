@@ -1,12 +1,11 @@
 package Usuarios;
 
 import Funcionalidade.Estoque;
+import Usuarios.Enums.ClienteOp;
 
 import java.util.Scanner;
 
 public class Cliente extends Person{
-
-    private Estoque list;
 
     public Cliente(String name, String login, String senha) {
         super(name, login, senha);
@@ -52,16 +51,7 @@ public class Cliente extends Person{
 
     @Override
     protected void opcoes() {
-
-        System.out.println("" +
-                "========== MENU CLIENTE ==========\n" +
-                "1 - Listar produtos disponíveis\n" +
-                "2 - Buscar produto\n" +
-                "3 - Comprar produto\n" +
-                "0 - Sair\n" +
-                "================================="
-        );
-
+        ClienteOp.imprimir();
     }
 
     @Override
@@ -74,19 +64,20 @@ public class Cliente extends Person{
             return;
         }
 
+        ClienteOp op = ClienteOp.selecionarOp(qtd);
         Scanner scanner = new Scanner(System.in);
 
-        switch (qtd){
-            case 1:
+        switch (op){
+            case LISTA:
                 list.listar();
                 break;
-            case 2:
+            case BUSCAR:
                 System.out.println("Digite o nome do produto: ");
                 String nome = scanner.nextLine();
 
                 list.buscar(nome);
                 break;
-            case 3:
+            case COMPRAR:
                 System.out.println("Digite o codigo do produto que deseja comprar e a quantidade: ");
                 int cod = scanner.nextInt();
                 int qtdProduto = scanner.nextInt();
@@ -94,7 +85,7 @@ public class Cliente extends Person{
                 list.retirarQtdProduto(cod, qtdProduto);
 
                 break;
-            case 0:
+            case SAIR:
                 System.out.println("Encerrou o programa.");
                 break;
         }
