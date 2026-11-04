@@ -1,7 +1,7 @@
 package Usuarios;
 
 import Funcionalidade.Estoque;
-import Usuarios.Enums.ClienteOp;
+import Enums.ClienteOp;
 
 import java.util.Scanner;
 

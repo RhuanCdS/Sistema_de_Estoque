@@ -1,4 +1,4 @@
-package Usuarios.Enums;
+package Enums;
 
 public enum AdminOp {
 
