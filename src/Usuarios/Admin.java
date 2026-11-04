@@ -2,7 +2,7 @@ package Usuarios;
 
 import Funcionalidade.Estoque;
 import Funcionalidade.Produto;
-import Usuarios.Enums.AdminOp;
+import Enums.AdminOp;
 
 import java.util.Scanner;
 
@@ -11,10 +11,13 @@ public class Admin extends Person{
     private Produto produto;
     private Estoque list;
 
-    private AdminOp adminOp;
-
     public Admin(String name, String login, String senha) {
         super(name, login, senha);
+    }
+
+    @Override
+    public String getSting() {
+        return "Admin" + name;
     }
 
     @Override

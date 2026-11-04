@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public abstract class Person {
 
-    private String name;
+    protected String name;
 
     private String login;
     private String senha;
@@ -15,6 +15,10 @@ public abstract class Person {
         this.name = name;
         this.login = login;
         this.senha = senha;
+    }
+
+    public  String getSting(){
+        return this.name;
     }
 
     protected String getLogin(){

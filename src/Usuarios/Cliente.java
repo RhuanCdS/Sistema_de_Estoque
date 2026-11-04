@@ -1,7 +1,7 @@
 package Usuarios;
 
 import Funcionalidade.Estoque;
-import Usuarios.Enums.ClienteOp;
+import Enums.ClienteOp;
 
 import java.util.Scanner;
 
@@ -9,6 +9,10 @@ public class Cliente extends Person{
 
     public Cliente(String name, String login, String senha) {
         super(name, login, senha);
+    }
+
+    public String getSting() {
+        return "Cliente" + name;
     }
 
     @Override
