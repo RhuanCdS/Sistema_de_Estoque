@@ -11,6 +11,10 @@ public class Cliente extends Person{
         super(name, login, senha);
     }
 
+    public String getSting() {
+        return "Cliente" + name;
+    }
+
     @Override
     public void abrirOpcoes() {
 

@@ -16,6 +16,11 @@ public class Admin extends Person{
     }
 
     @Override
+    public String getSting() {
+        return "Admin" + name;
+    }
+
+    @Override
     public void abrirOpcoes() {
 
         Scanner scanner = new Scanner(System.in);
