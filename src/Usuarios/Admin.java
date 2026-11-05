@@ -19,12 +19,13 @@ public class Admin extends Person{
 
     public Admin(String name, String login, String senha) {
         super(name, login, senha);
-        this.historicoMovimentacao = new HistoricoMovimentacao();
+        this.historicoMovimentacao = HistoricoMovimentacao.getInstance();
+        this.list = Estoque.getInstancia();
     }
 
     @Override
     public String getString(){
-        return "Admin: " + name;
+        return "Admin -> " + name;
     }
 
     @Override
@@ -229,6 +230,8 @@ public class Admin extends Person{
     private void criarEstoque(int qtd){
 
         if (Estoque.getInstancia() != null){
+            this.list = Estoque.getInstancia();
+
             System.out.println("Já existe um estoque cadastrado.");
             return;
         }

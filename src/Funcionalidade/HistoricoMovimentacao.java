@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class HistoricoMovimentacao {
 
     private static ArrayList<Movimentacao> movimentacao;
+    private static HistoricoMovimentacao instance;
 
     public HistoricoMovimentacao(){
         movimentacao = new ArrayList<>();
@@ -14,6 +15,15 @@ public class HistoricoMovimentacao {
 
     public void inserirNoHistorico(Movimentacao movimentacao){
         this.movimentacao.add(movimentacao);
+    }
+
+    public static HistoricoMovimentacao getInstance() {
+
+        if(instance == null){
+            instance = new HistoricoMovimentacao();
+        }
+
+        return instance;
     }
 
     public void imprimirHistorico(){
@@ -35,7 +45,7 @@ public class HistoricoMovimentacao {
 
             System.out.println(
                     "\n----------------------------------------" +
-                    "MOVIMENTAÇÃO" + movimentacao.get(i).getCont() +
+                    "MOVIMENTAÇÃO " + movimentacao.get(i).getCont() +
                     "----------------------------------------"
             );
 

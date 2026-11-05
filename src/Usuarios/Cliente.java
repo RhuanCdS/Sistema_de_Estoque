@@ -2,21 +2,25 @@ package Usuarios;
 
 import Funcionalidade.Estoque;
 import Enums.ClienteOp;
+import Funcionalidade.HistoricoMovimentacao;
+import Funcionalidade.Movimentacao;
 import Funcionalidade.Produto;
 
 import java.util.Scanner;
 
 public class Cliente extends Person{
 
-    private Estoque estoque;
+    private HistoricoMovimentacao historicoMovimentacao;
+    private Movimentacao movimentacao;
 
     public Cliente(String name, String login, String senha) {
         super(name, login, senha);
+        this.historicoMovimentacao = HistoricoMovimentacao.getInstance();
     }
 
     @Override
     public String getString(){
-        return "Cliente" + name;
+        return "Cliente -> " + name;
     }
 
     @Override
@@ -90,8 +94,10 @@ public class Cliente extends Person{
                 int cod = scanner.nextInt();
                 int qtdProduto = scanner.nextInt();
 
-                Produto produto = estoque.retornarProduto(cod);
+                Produto produto = Estoque.getInstancia().retornarProduto(cod);
 
+                this.movimentacao = new Movimentacao(this, produto, qtdProduto, 0);
+                historicoMovimentacao.inserirNoHistorico(movimentacao);
 
                 list.retirarQtdProduto(cod, qtdProduto);
 
