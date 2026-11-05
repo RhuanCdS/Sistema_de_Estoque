@@ -11,7 +11,8 @@ public class Cliente extends Person{
         super(name, login, senha);
     }
 
-    public String getSting() {
+    @Override
+    public String getString(){
         return "Cliente" + name;
     }
 

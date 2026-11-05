@@ -1,5 +1,6 @@
 package Main;
 
+import Funcionalidade.Movimentacao;
 import Usuarios.Admin;
 import Usuarios.Cliente;
 import Usuarios.Person;

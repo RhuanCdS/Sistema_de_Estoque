@@ -17,6 +17,10 @@ public abstract class Person {
         this.senha = senha;
     }
 
+    public String getString(){
+        return name;
+    }
+
     public  String getSting(){
         return this.name;
     }

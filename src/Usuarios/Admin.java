@@ -16,7 +16,7 @@ public class Admin extends Person{
     }
 
     @Override
-    public String getSting() {
+    public String getString(){
         return "Admin" + name;
     }
 
