@@ -2,10 +2,13 @@ package Usuarios;
 
 import Funcionalidade.Estoque;
 import Enums.ClienteOp;
+import Funcionalidade.Produto;
 
 import java.util.Scanner;
 
 public class Cliente extends Person{
+
+    private Estoque estoque;
 
     public Cliente(String name, String login, String senha) {
         super(name, login, senha);
@@ -85,6 +88,9 @@ public class Cliente extends Person{
                 System.out.println("Digite o codigo do produto que deseja comprar e a quantidade: ");
                 int cod = scanner.nextInt();
                 int qtdProduto = scanner.nextInt();
+
+                Produto produto = estoque.retornarProduto(cod);
+
 
                 list.retirarQtdProduto(cod, qtdProduto);
 

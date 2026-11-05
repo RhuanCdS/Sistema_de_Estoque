@@ -202,4 +202,14 @@ public class Estoque {
 
     }
 
+    public Produto retornarProduto(int cod){
+
+        int i = 0;
+
+        while (this.list[i].getCod() != cod){
+            i++;
+        }
+
+        return this.list[i];
+    }
 }
