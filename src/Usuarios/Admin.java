@@ -1,8 +1,11 @@
 package Usuarios;
 
 import Funcionalidade.Estoque;
+import Funcionalidade.HistoricoMovimentacao;
+import Funcionalidade.Movimentacao;
 import Funcionalidade.Produto;
 import Enums.AdminOp;
+import Funcionalidade.HistoricoMovimentacao;
 
 import java.util.Scanner;
 
@@ -11,13 +14,17 @@ public class Admin extends Person{
     private Produto produto;
     private Estoque list;
 
+    private HistoricoMovimentacao historicoMovimentacao;
+    private Movimentacao movimentacao;
+
     public Admin(String name, String login, String senha) {
         super(name, login, senha);
+        this.historicoMovimentacao = new HistoricoMovimentacao();
     }
 
     @Override
     public String getString(){
-        return "Admin" + name;
+        return "Admin: " + name;
     }
 
     @Override
@@ -146,10 +153,14 @@ public class Admin extends Person{
 
                     System.out.println("\nDigite o COD do produto: ");
                     int cod = scanner.nextInt();
-                    System.out.println("Digite o valor que deseja adicionar: ");
-                    int newPrice = scanner.nextInt();
+                    System.out.println("Digite a quantidade que deseja adicionar: ");
+                    int moreQtd = scanner.nextInt();
 
-                    list.adicionarQtdProduto(cod, newPrice);
+                    this.movimentacao = new Movimentacao(this, produto, moreQtd, 1);
+
+                    list.adicionarQtdProduto(cod, moreQtd);
+                    historicoMovimentacao.inserirNoHistorico(movimentacao);
+
                 }else{
                     System.out.println("" +
                             "Selecione uma opção existente." +
@@ -185,6 +196,11 @@ public class Admin extends Person{
                 list.consultarQtdProduto(i);
 
                 break;
+            case HISTORICOMOVIMENTACAO:
+
+                historicoMovimentacao.imprimirHistorico();
+
+                break;
             case ALTERAR:
                 System.out.println("Digite a nova senha: ");
                 String s = scanner.nextLine();
@@ -208,7 +224,6 @@ public class Admin extends Person{
         this.produto = new Produto(name, qtd, preco);
 
         inserirProdutoNoEstoque(this.produto);
-
     }
 
     private void criarEstoque(int qtd){

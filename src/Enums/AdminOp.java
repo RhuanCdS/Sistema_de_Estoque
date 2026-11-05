@@ -9,6 +9,7 @@ public enum AdminOp {
     ATUALIZAR(5, "Atualizar produto"),
     EXCLUIR(6, "Excluir produto"),
     CONSULTAR(7, "Consultar quantidade em estoque"),
+    HISTORICOMOVIMENTACAO(8, "Histórico de movimentações"),
     ALTERAR(8, "Alterar senha"),
     SAIR(0, "Sair");
 
