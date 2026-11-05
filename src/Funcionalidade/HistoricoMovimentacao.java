@@ -9,7 +9,7 @@ public class HistoricoMovimentacao {
     private static ArrayList<Movimentacao> movimentacao;
     private static HistoricoMovimentacao instance;
 
-    public HistoricoMovimentacao(){
+    private HistoricoMovimentacao(){
         movimentacao = new ArrayList<>();
     }
 
