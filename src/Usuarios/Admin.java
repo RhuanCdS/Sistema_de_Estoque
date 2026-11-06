@@ -157,6 +157,8 @@ public class Admin extends Person{
                     System.out.println("Digite a quantidade que deseja adicionar: ");
                     int moreQtd = scanner.nextInt();
 
+                    Produto produto = Estoque.getInstancia().retornarProduto(cod);
+
                     this.movimentacao = new Movimentacao(this, produto, moreQtd, 1);
 
                     list.adicionarQtdProduto(cod, moreQtd);
