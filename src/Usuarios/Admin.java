@@ -198,6 +198,9 @@ public class Admin extends Person{
                 historicoMovimentacao.imprimirHistorico();
 
                 break;
+            case ALERTAESTOQUE:
+                list.imprimirAlerta();
+                break;
             case ALTERAR:
                 System.out.println("Digite a nova senha: ");
                 String s = scanner.nextLine();

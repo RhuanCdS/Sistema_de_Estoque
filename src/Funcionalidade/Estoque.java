@@ -188,4 +188,39 @@ public class Estoque {
 
         return this.list.get(i);
     }
+
+    public void imprimirAlerta(){
+
+        System.out.println("========================================");
+        System.out.println("        HISTÓRICO DE MOVIMENTAÇÕES      ");
+        System.out.println("========================================");
+
+        int count = 0;
+
+        if (list.getFirst() != null){
+            System.out.println("\nATENÇÃO: ESTOQUE BAIXO!");
+            System.out.println("Quantidade minima: 5\n");
+
+            for(int i = 0; i < list.size(); i++){
+
+                if (list.get(i).getQtd() < 5){
+                    System.out.println("\nProduto: " + list.get(i).getName());
+                    System.out.println("Quantidade atual: " + list.get(i).getQtd());
+                    count++;
+                }
+
+            }
+
+            System.out.println("\nTotal de produtos em alerta: " + count);
+        }else{
+            System.out.println(
+                    "\nNenhum produto com estoque baixo!" +
+                    "Todos os produtos estão com \n" +
+                    "quantidade acima do límite minimo\n"
+            );
+        }
+
+        System.out.println("========================================");
+
+    }
 }

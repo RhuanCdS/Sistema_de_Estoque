@@ -9,7 +9,8 @@ public enum AdminOp {
     EXCLUIR(5, "Excluir produto"),
     CONSULTAR(6, "Consultar quantidade em estoque"),
     HISTORICOMOVIMENTACAO(7, "Histórico de movimentações"),
-    ALTERAR(8, "Alterar senha"),
+    ALERTAESTOQUE(8, "Relatório de estoque"),
+    ALTERAR(9, "Alterar senha"),
     SAIR(0, "Sair");
 
     private int cod;
