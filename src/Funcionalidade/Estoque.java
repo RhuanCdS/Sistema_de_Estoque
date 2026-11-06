@@ -1,50 +1,29 @@
 package Funcionalidade;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Estoque {
 
     private static Estoque instancia;
+    private ArrayList<Produto> list;
 
-    private Produto[] list;
-    private int qtd_list;
 
-    private int count = 0;
-
-    private Estoque(int qtd_list){
-
-        this.qtd_list = qtd_list;
-        this.list = new Produto[this.qtd_list];
-
-    }
-
-    public static Estoque criarList(int size){
-
-        if(instancia == null){
-            instancia = new Estoque(size);
-        }
-
-        return instancia;
-
+    private Estoque(){
+        this.list = new ArrayList<>();
     }
 
     public static Estoque getInstancia() {
+
+        if(instancia == null){
+            instancia = new Estoque();
+        }
+
         return instancia;
     }
 
     public void cadastrar(Produto produto){
-
-        if(this.count < this.qtd_list){
-
-            this.list[count] = produto;
-            count++;
-
-        }else {
-
-            System.out.println("Lista está cheia!!!");
-
-        }
-
+        list.add(produto);
     }
 
     public void listar(){
@@ -56,14 +35,14 @@ public class Estoque {
 
         System.out.println("Cod | Nome | Qtd | Preço");
 
-        for (int i = 0; i < count; i++){
+        for (int i = 0; i < list.size(); i++){
 
             System.out.println(
 
-                    list[i].getCod() + " | " +
-                    list[i].getName() + " | " +
-                    list[i].getQtd() + " | " +
-                    list[i].getPreco()
+                    list.get(i).getCod() + " | " +
+                    list.get(i).getName() + " | " +
+                    list.get(i).getQtd() + " | " +
+                    list.get(i).getPreco()
 
             );
 
@@ -78,9 +57,9 @@ public class Estoque {
             return;
         }
 
-        for(int i = 0; i < count; i++){
+        for(int i = 0; i < list.size(); i++){
 
-            if(Objects.equals(list[i].getName().toUpperCase(), name)){
+            if(Objects.equals(list.get(i).getName().toUpperCase(), name)){
 
                 System.out.println("Produto encontrado.");
                 return;
@@ -97,15 +76,15 @@ public class Estoque {
 
         int i = 0;
 
-        if(list[0] == null) return;
+        if(list.getFirst() == null) return;
 
-        while(i < count && list[i].getCod() != cod){
+        while(i < list.size() && list.get(i).getCod() != cod){
             i++;
         }
 
-        if(list[i] == null) return;
+        if(list.get(i) == null) return;
 
-        list[i].setPreco(newPreco);
+        list.get(i).setPreco(newPreco);
 
         System.out.println("Preço do produto atualizado com sucesso!!!");
 
@@ -113,15 +92,15 @@ public class Estoque {
 
     public void excluir(int cod){
 
-        if(list[0] == null) {return;}
+        if(list.getFirst() == null) {return;}
 
         int i = 0;
-        Produto atual = list[0];
+        Produto atual = list.get(0);
 
 
-        while (i < count - 1 && list[i].getCod() != cod){
+        while (i < list.size() && list.get(i).getCod() != cod){
             i++;
-            atual = list[i];
+            atual = list.get(i);
         }
 
         if(atual == null){
@@ -129,26 +108,23 @@ public class Estoque {
             return;
         }
 
-        for (int k = i; k < count - 1; k++){
+        for (int k = i; k < list.size(); k++){
 
-            list[k] = list[k + 1];
+            list.set(k, list.get(k - 1));
 
         }
 
-        list[count - 1] = null;
-        count--;
-
-
+        list.removeLast();
     }
 
     public void consultarQtdProduto(int c){
 
-        if(list[0] == null){
+        if(list.getFirst() == null){
             System.out.println("Nenhum produto no estoque.");
             return;
         }
 
-        Produto t = list[c - 1];
+        Produto t = list.get(c - 1);
 
         int qtdP = t.getQtd();
 
@@ -159,18 +135,18 @@ public class Estoque {
 
         int i = 0;
 
-        if(list[0] == null) return;
+        if(list.getFirst() == null) return;
 
-        while(list[i].getCod() != index && list[i] != null && i < count - 1){
+        while(list.get(i).getCod() != index && list.get(i) != null){
             i++;
         }
 
-        if(list[i] == null){
+        if(list.get(i) == null){
             System.out.println("Produto não encontrado!!!");
             return;
         }
 
-        list[i].aumentarQtdProduto(qtd);
+        list.get(i).aumentarQtdProduto(qtd);
         System.out.println("Quantidade de produto adicionado com sucesso.");
 
     }
@@ -179,25 +155,25 @@ public class Estoque {
 
         int i = 0;
 
-        if(list[0] == null) return;
+        if(list.getFirst() == null) return;
 
-        while(list[i].getCod() != index && list[i] != null && i < count - 1){
+        while(list.get(i).getCod() != index && list.get(i) != null){
             i++;
         }
 
-        if(list[i] == null){
+        if(list.get(i) == null){
             System.out.println("Produto não encontrado!!!");
             return;
         }
 
-        int qtdP = list[i].getQtd();
+        int qtdP = list.get(i).getQtd();
 
         if(qtdP < qtd){
             System.out.println("Quantidade de produto no estoque insuficiente.");
             return;
         }
 
-        list[i].diminuirQtdProduto(qtd);
+        list.get(i).diminuirQtdProduto(qtd);
         System.out.println("Produto comprado com sucesso.");
 
     }
@@ -206,10 +182,10 @@ public class Estoque {
 
         int i = 0;
 
-        while (this.list[i].getCod() != cod){
+        while (this.list.get(i).getCod() != cod){
             i++;
         }
 
-        return this.list[i];
+        return this.list.get(i);
     }
 }

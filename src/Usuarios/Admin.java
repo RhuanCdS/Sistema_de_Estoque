@@ -89,12 +89,6 @@ public class Admin extends Person{
         }
 
         switch (op){
-            case CRIAR:
-                System.out.println("Digite o tamanho do estoque: ");
-                int tamanho = scanner.nextInt();
-
-                criarEstoque(tamanho);
-                break;
             case CADASTRAR:
                 System.out.println("Crie o produto: Ex: ( Nome, Qtd, preço ) ");
                 String name = scanner.next();
@@ -227,18 +221,6 @@ public class Admin extends Person{
         this.produto = new Produto(name, qtd, preco);
 
         inserirProdutoNoEstoque(this.produto);
-    }
-
-    private void criarEstoque(int qtd){
-
-        if (Estoque.getInstancia() != null){
-            this.list = Estoque.getInstancia();
-
-            System.out.println("Já existe um estoque cadastrado.");
-            return;
-        }
-
-        this.list = Estoque.criarList(qtd);
     }
 
     private void inserirProdutoNoEstoque(Produto produto){
