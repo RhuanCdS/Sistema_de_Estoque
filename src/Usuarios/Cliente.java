@@ -75,32 +75,36 @@ public class Cliente extends Person{
         ClienteOp op = ClienteOp.selecionarOp(qtd);
         Scanner scanner = new Scanner(System.in);
 
-        switch (op){
-            case LISTA:
-                list.listar();
-                break;
-            case BUSCAR:
-                System.out.println("Digite o nome do produto: ");
-                String nome = scanner.nextLine();
+        try {
+            switch (op) {
+                case LISTA:
+                    list.listar();
+                    break;
+                case BUSCAR:
+                    System.out.println("Digite o nome do produto: ");
+                    String nome = scanner.nextLine();
 
-                list.buscar(nome);
-                break;
-            case COMPRAR:
-                System.out.println("Digite o codigo do produto que deseja comprar e a quantidade: ");
-                int cod = scanner.nextInt();
-                int qtdProduto = scanner.nextInt();
+                    list.buscar(nome);
+                    break;
+                case COMPRAR:
+                    System.out.println("Digite o codigo do produto que deseja comprar e a quantidade: ");
+                    int cod = scanner.nextInt();
+                    int qtdProduto = scanner.nextInt();
 
-                Produto produto = Estoque.getInstancia().retornarProduto(cod);
+                    Produto produto = Estoque.getInstancia().retornarProduto(cod);
 
-                this.movimentacao = new Movimentacao(this, produto, qtdProduto, 0);
-                historicoMovimentacao.inserirNoHistorico(movimentacao);
+                    this.movimentacao = new Movimentacao(this, produto, qtdProduto, 0);
+                    historicoMovimentacao.inserirNoHistorico(movimentacao);
 
-                list.retirarQtdProduto(cod, qtdProduto);
+                    list.retirarQtdProduto(cod, qtdProduto);
 
-                break;
-            case SAIR:
-                System.out.println("Encerrou o programa.");
-                break;
+                    break;
+                case SAIR:
+                    System.out.println("Encerrou o programa.");
+                    break;
+            }
+        } catch (RuntimeException e) {
+            System.out.println("Opção invalida!!!");
         }
 
 

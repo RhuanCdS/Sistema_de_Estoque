@@ -88,139 +88,143 @@ public class Admin extends Person{
             return;
         }
 
-        switch (op){
-            case CADASTRAR:
-                System.out.println("Crie o produto: Ex: ( Nome, Qtd, preço ) ");
-                String name = scanner.next();
-                int qtd_op = scanner.nextInt();
-                double price = scanner.nextDouble();
+        try {
+            switch (op) {
+                case CADASTRAR:
+                    System.out.println("Crie o produto: Ex: ( Nome, Qtd, preço ) ");
+                    String name = scanner.next();
+                    int qtd_op = scanner.nextInt();
+                    double price = scanner.nextDouble();
 
-                criarProduto(name, qtd_op, price);
-                break;
-            case LISTAR:
+                    criarProduto(name, qtd_op, price);
+                    break;
+                case LISTAR:
 
-                if(list  == null){
-                    System.out.println("Estoque inexistente.");
-                    return;
-                }
-
-                list.listar();
-                break;
-            case BUSCAR:
-
-                if(list  == null){
-                    System.out.println("Estoque inexistente.");
-                    return;
-                }
-
-                System.out.println("Qual produto deseja procurar ?");
-                String nameProduto = scanner.nextLine();
-                
-                list.buscar(nameProduto.toUpperCase());
-                break;
-            case ATUALIZAR:
-
-                if(list  == null){
-                    System.out.println("Estoque inexistente.");
-                    return;
-                }
-
-                System.out.println("" +
-                        "Selecione uma das opções: \n" +
-                        "1 - Atualizar preço \n" +
-                        "2 - Atualizar quantidade" +
-                        "");
-
-                int select = scanner.nextInt();
-
-                list.listar();
-
-                if(select == 1){
-
-                    System.out.println("\nDigite o COD do produto: ");
-                    int cod = scanner.nextInt();
-                    System.out.println("Digite o novo preço: ");
-                    double newPrice = scanner.nextDouble();
-
-                    list.atualizarPrice(cod, newPrice);
-
-                } else if (select == 2){
-
-                    System.out.println("\nDigite o COD do produto: ");
-                    int cod = scanner.nextInt();
-                    System.out.println("Digite a quantidade que deseja adicionar: ");
-                    int moreQtd = scanner.nextInt();
-
-                    try {
-
-                        list.adicionarQtdProduto(cod, moreQtd);
-
-                        Produto produto = Estoque.getInstancia().retornarProduto(cod);
-
-                        this.movimentacao = new Movimentacao(this, produto, moreQtd, 1);
-                        historicoMovimentacao.inserirNoHistorico(movimentacao);
-
-                    }catch (RuntimeException e){
-                        System.out.println("Codigo do produto invalido.");
+                    if (list == null) {
+                        System.out.println("Estoque inexistente.");
+                        return;
                     }
 
+                    list.listar();
+                    break;
+                case BUSCAR:
 
-                }else{
+                    if (list == null) {
+                        System.out.println("Estoque inexistente.");
+                        return;
+                    }
+
+                    System.out.println("Qual produto deseja procurar ?");
+                    String nameProduto = scanner.nextLine();
+
+                    list.buscar(nameProduto.toUpperCase());
+                    break;
+                case ATUALIZAR:
+
+                    if (list == null) {
+                        System.out.println("Estoque inexistente.");
+                        return;
+                    }
+
                     System.out.println("" +
-                            "Selecione uma opção existente." +
-                            "O programa vai se encerrar."
-                    );
+                            "Selecione uma das opções: \n" +
+                            "1 - Atualizar preço \n" +
+                            "2 - Atualizar quantidade" +
+                            "");
 
-                }
+                    int select = scanner.nextInt();
 
-                break;
-            case EXCLUIR:
+                    list.listar();
 
-                if(list  == null){
-                    System.out.println("Estoque inexistente.");
-                    return;
-                }
+                    if (select == 1) {
 
-                System.out.println("Digite o codigo do produto que desja excluir: ");
-                int c = scanner.nextInt();
+                        System.out.println("\nDigite o COD do produto: ");
+                        int cod = scanner.nextInt();
+                        System.out.println("Digite o novo preço: ");
+                        double newPrice = scanner.nextDouble();
 
-                list.excluir(c);
+                        list.atualizarPrice(cod, newPrice);
 
-                break;
-            case CONSULTAR:
+                    } else if (select == 2) {
 
-                if(list  == null){
-                    System.out.println("Estoque inexistente.");
-                    return;
-                }
+                        System.out.println("\nDigite o COD do produto: ");
+                        int cod = scanner.nextInt();
+                        System.out.println("Digite a quantidade que deseja adicionar: ");
+                        int moreQtd = scanner.nextInt();
 
-                System.out.println("Digite o cod para ver q qtd no estoque:  ");
-                int i = scanner.nextInt();
+                        try {
 
-                list.consultarQtdProduto(i);
+                            list.adicionarQtdProduto(cod, moreQtd);
 
-                break;
-            case HISTORICOMOVIMENTACAO:
+                            Produto produto = Estoque.getInstancia().retornarProduto(cod);
 
-                historicoMovimentacao.imprimirHistorico();
+                            this.movimentacao = new Movimentacao(this, produto, moreQtd, 1);
+                            historicoMovimentacao.inserirNoHistorico(movimentacao);
 
-                break;
-            case ALERTAESTOQUE:
-                list.imprimirAlerta();
-                break;
-            case ALTERAR:
-                System.out.println("Digite a nova senha: ");
-                String s = scanner.nextLine();
+                        } catch (RuntimeException e) {
+                            System.out.println("Codigo do produto invalido.");
+                        }
 
-                recuperarSenha(s);
-                break;
-            case SAIR:
-                System.out.println("Encerrou o programa.");
-                break;
 
-            default:
+                    } else {
+                        System.out.println("" +
+                                "Selecione uma opção existente." +
+                                "O programa vai se encerrar."
+                        );
 
-                break;
+                    }
+
+                    break;
+                case EXCLUIR:
+
+                    if (list == null) {
+                        System.out.println("Estoque inexistente.");
+                        return;
+                    }
+
+                    System.out.println("Digite o codigo do produto que desja excluir: ");
+                    int c = scanner.nextInt();
+
+                    list.excluir(c);
+
+                    break;
+                case CONSULTAR:
+
+                    if (list == null) {
+                        System.out.println("Estoque inexistente.");
+                        return;
+                    }
+
+                    System.out.println("Digite o cod para ver q qtd no estoque:  ");
+                    int i = scanner.nextInt();
+
+                    list.consultarQtdProduto(i);
+
+                    break;
+                case HISTORICOMOVIMENTACAO:
+
+                    historicoMovimentacao.imprimirHistorico();
+
+                    break;
+                case ALERTAESTOQUE:
+                    list.imprimirAlerta();
+                    break;
+                case ALTERAR:
+                    System.out.println("Digite a nova senha: ");
+                    String s = scanner.nextLine();
+
+                    recuperarSenha(s);
+                    break;
+                case SAIR:
+                    System.out.println("Encerrou o programa.");
+                    break;
+
+                default:
+
+                    break;
+            }
+        } catch (RuntimeException e) {
+            System.out.println("Opção invalidade!!!");
         }
 
     }
