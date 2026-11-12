@@ -20,39 +20,39 @@ public class Produto {
 
     }
 
-    protected int getCod(){
+    public int getCod(){
         return this.cod;
     }
 
-    protected String getName(){
+    public String getName(){
         return this.name;
     }
 
-    protected void setName(String name){
+    public void setName(String name){
         this.name = name;
     }
 
-    protected int getQtd(){
+    public int getQtd(){
         return this.qtd;
     }
 
-    protected void setQtd(int qtd){
+    public void setQtd(int qtd){
         this.qtd = qtd;
     }
 
-    protected void aumentarQtdProduto(int qtd){
+    public void aumentarQtdProduto(int qtd){
         this.qtd += qtd;
     }
 
-    protected void diminuirQtdProduto(int qtd){
+    public void diminuirQtdProduto(int qtd){
         this.qtd -= qtd;
     }
 
-    protected double getPreco(){
+    public double getPreco(){
         return this.preco;
     }
 
-    protected void setPreco(double preco){
+    public void setPreco(double preco){
         this.preco = preco;
     }
 

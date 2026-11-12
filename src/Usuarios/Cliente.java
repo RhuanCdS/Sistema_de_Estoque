@@ -32,7 +32,7 @@ public class Cliente extends Person{
 
         boolean verif = verificacaoSenha(senha);
 
-        while (verif == false){
+        while (!verif){
 
             System.out.println("Digite novamente sua senha: ");
             senha = scanner.nextLine();
@@ -40,8 +40,6 @@ public class Cliente extends Person{
             verif = verificacaoSenha(senha);
 
         }
-
-        if(verif){
 
             Scanner scanOp = new Scanner(System.in);
 
@@ -57,8 +55,6 @@ public class Cliente extends Person{
 
             }
 
-
-        }
     }
 
     @Override

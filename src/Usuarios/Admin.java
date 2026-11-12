@@ -151,12 +151,19 @@ public class Admin extends Person{
                     System.out.println("Digite a quantidade que deseja adicionar: ");
                     int moreQtd = scanner.nextInt();
 
-                    Produto produto = Estoque.getInstancia().retornarProduto(cod);
+                    try {
 
-                    this.movimentacao = new Movimentacao(this, produto, moreQtd, 1);
+                        list.adicionarQtdProduto(cod, moreQtd);
 
-                    list.adicionarQtdProduto(cod, moreQtd);
-                    historicoMovimentacao.inserirNoHistorico(movimentacao);
+                        Produto produto = Estoque.getInstancia().retornarProduto(cod);
+
+                        this.movimentacao = new Movimentacao(this, produto, moreQtd, 1);
+                        historicoMovimentacao.inserirNoHistorico(movimentacao);
+
+                    }catch (RuntimeException e){
+                        System.out.println("Codigo do produto invalido.");
+                    }
+
 
                 }else{
                     System.out.println("" +
@@ -209,6 +216,10 @@ public class Admin extends Person{
                 break;
             case SAIR:
                 System.out.println("Encerrou o programa.");
+                break;
+
+            default:
+
                 break;
         }
 

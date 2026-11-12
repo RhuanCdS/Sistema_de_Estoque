@@ -28,7 +28,7 @@ public class Estoque {
 
     public void listar(){
 
-        if(list == null){
+        if(list.isEmpty()){
             System.out.println("Estoque vazio!!!");
             return;
         }
@@ -52,14 +52,14 @@ public class Estoque {
 
     public void buscar(String name){
 
-        if(list == null){
+        if(list.isEmpty()){
             System.out.println("Estoque vazio!!!");
             return;
         }
 
         for(int i = 0; i < list.size(); i++){
 
-            if(Objects.equals(list.get(i).getName().toUpperCase(), name)){
+            if(Objects.equals(list.get(i).getName().toUpperCase(), name.toUpperCase())){
 
                 System.out.println("Produto encontrado.");
                 return;
@@ -74,57 +74,46 @@ public class Estoque {
 
     public void atualizarPrice(int cod, double newPreco){
 
-        int i = 0;
+        if(list.isEmpty()) return;
 
-        if(list.getFirst() == null) return;
+        int p = list.size() - cod;
 
-        while(i < list.size() && list.get(i).getCod() != cod){
-            i++;
+        try {
+            list.get(p).setPreco(newPreco);
+            System.out.println("Preço do produto atualizado com sucesso!!!");
+
+        } catch (Exception e) {
+            System.out.println("Produto nao encontrado.");
         }
 
-        if(list.get(i) == null) return;
-
-        list.get(i).setPreco(newPreco);
-
-        System.out.println("Preço do produto atualizado com sucesso!!!");
 
     }
 
     public void excluir(int cod){
 
-        if(list.getFirst() == null) {return;}
+        if(list.isEmpty()) return;
 
-        int i = 0;
-        Produto atual = list.get(0);
+        int p = list.size() - cod;
 
-
-        while (i < list.size() && list.get(i).getCod() != cod){
-            i++;
-            atual = list.get(i);
+        try {
+            list.remove(p);
+            System.out.println("Produto excluido.");
+        }catch (RuntimeException e){
+            System.out.println("Produto nao encontrado!!!");
         }
 
-        if(atual == null){
-            System.out.println("Item inexistente");
-            return;
-        }
-
-        for (int k = i; k < list.size(); k++){
-
-            list.set(k, list.get(k - 1));
-
-        }
-
-        list.removeLast();
     }
 
     public void consultarQtdProduto(int c){
 
-        if(list.getFirst() == null){
+        if(list.isEmpty()){
             System.out.println("Nenhum produto no estoque.");
             return;
         }
 
-        Produto t = list.get(c - 1);
+        int p = list.size() - c;
+
+        Produto t = list.get(p);
 
         int qtdP = t.getQtd();
 
@@ -133,60 +122,56 @@ public class Estoque {
 
     public void adicionarQtdProduto(int index, int qtd){
 
-        int i = 0;
+        if(list.isEmpty() || index > list.size()) return;
 
-        if(list.getFirst() == null) return;
+        int p = list.size() - index;
 
-        while(list.get(i).getCod() != index && list.get(i) != null){
-            i++;
+        try {
+            list.get(p).aumentarQtdProduto(qtd);
+            System.out.println("Preço do produto atualizado com sucesso!!!");
+
+        } catch (Exception e) {
+            System.out.println("Produto nao encontrado.");
         }
-
-        if(list.get(i) == null){
-            System.out.println("Produto não encontrado!!!");
-            return;
-        }
-
-        list.get(i).aumentarQtdProduto(qtd);
-        System.out.println("Quantidade de produto adicionado com sucesso.");
 
     }
 
     public void retirarQtdProduto(int index, int qtd){
 
-        int i = 0;
 
-        if(list.getFirst() == null) return;
+        if(list.isEmpty() || index > list.size()) return;
 
-        while(list.get(i).getCod() != index && list.get(i) != null){
-            i++;
+        int p = list.size() - index;
+
+        try {
+
+            int qtdP = list.get(p).getQtd();
+
+            if(qtdP < qtd){
+                System.out.println("Quantidade de produto no estoque insuficiente.");
+                return;
+            }
+
+            list.get(p).diminuirQtdProduto(qtd);
+            System.out.println("Produto comprado com sucesso.");
+
+        } catch (Exception e) {
+
+            System.out.println("Produto nao encontrado.");
+
         }
-
-        if(list.get(i) == null){
-            System.out.println("Produto não encontrado!!!");
-            return;
-        }
-
-        int qtdP = list.get(i).getQtd();
-
-        if(qtdP < qtd){
-            System.out.println("Quantidade de produto no estoque insuficiente.");
-            return;
-        }
-
-        list.get(i).diminuirQtdProduto(qtd);
-        System.out.println("Produto comprado com sucesso.");
 
     }
 
     public Produto retornarProduto(int cod){
 
-        int i = 0;
-
-        while (this.list.get(i).getCod() != cod){
-            i++;
+        if(cod > list.size()){
+            return null;
         }
 
-        return this.list.get(i);
+        int p = list.size() - cod;
+
+        return this.list.get(p);
     }
 
     public void imprimirAlerta(){
@@ -197,7 +182,14 @@ public class Estoque {
 
         int count = 0;
 
-        if (list.getFirst() != null){
+        if (list.isEmpty()){
+            System.out.println(
+                    "\nNenhum produto com estoque baixo!" +
+                            "Todos os produtos estão com \n" +
+                            "quantidade acima do límite minimo\n"
+            );
+        }else{
+
             System.out.println("\nATENÇÃO: ESTOQUE BAIXO!");
             System.out.println("Quantidade minima: 5\n");
 
@@ -212,12 +204,6 @@ public class Estoque {
             }
 
             System.out.println("\nTotal de produtos em alerta: " + count);
-        }else{
-            System.out.println(
-                    "\nNenhum produto com estoque baixo!" +
-                    "Todos os produtos estão com \n" +
-                    "quantidade acima do límite minimo\n"
-            );
         }
 
         System.out.println("========================================");
