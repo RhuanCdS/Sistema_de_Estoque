@@ -50,9 +50,9 @@ public class Admin extends Person{
 
             Scanner scanOp = new Scanner(System.in);
 
-            int op = -1;
+            int op;
 
-            while (op != 0){
+            do{
                 opcoes();
 
                 System.out.println("Com qual ação deseja prosseguir ?");
@@ -60,7 +60,7 @@ public class Admin extends Person{
 
                 selecionarOpcoes(op);
 
-            }
+            }while (op != 0);
 
 
         }
